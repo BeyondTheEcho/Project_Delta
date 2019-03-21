@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5777098403087685041}
   - component: {fileID: 735282646569985920}
   - component: {fileID: 7875787845844419156}
+  - component: {fileID: 2941448970316253652}
+  - component: {fileID: 8124318287091923908}
   m_Layer: 0
   m_Name: Bomber
   m_TagString: Untagged
@@ -92,3 +94,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1f9b75c47f7184eacaedb234a1e52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2941448970316253652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5881683702102002116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab9d666a3b45d547b6e6cb890172a15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 300
+--- !u!58 &8124318287091923908
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5881683702102002116}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.42
