@@ -6,8 +6,7 @@ using UnityEngine;
 public class EnemyPathing : MonoBehaviour
 {
     //Config
-    [SerializeField] float pathSpeed = 2f;
-    [SerializeField] WaveConfig waveConfig;
+    WaveConfig waveConfig;
     List<Transform> waypoints;
     int waypointIndex = 0;
 
@@ -33,7 +32,7 @@ public class EnemyPathing : MonoBehaviour
             //Sets and stores waypoint position
             var targetPosition = waypoints[waypointIndex].position;
             //makes pathing speed framerate independent
-            var pathDelta = pathSpeed * Time.deltaTime;
+            var pathDelta = waveConfig.GetMoveSpeed() * Time.deltaTime;
             // Moves towards the next waypoint
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, pathDelta);
 
@@ -48,5 +47,10 @@ public class EnemyPathing : MonoBehaviour
             // Destroys gameobject when pathing is complete
             Destroy(gameObject);
         }
+    }
+
+    public void SetWaveConfig(WaveConfig passedWaveConfig)
+    {
+        this.waveConfig = passedWaveConfig;
     }
 }
