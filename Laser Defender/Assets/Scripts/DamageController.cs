@@ -12,7 +12,7 @@ public class DamageController : MonoBehaviour
         return damage;
     }
 
-    public void hit()
+    public void Hit()
     {
         Destroy(gameObject);
     }

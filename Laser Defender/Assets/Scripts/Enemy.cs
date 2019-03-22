@@ -51,16 +51,25 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Assigns the damagecontroller var to the DamageController.cs attached to the object that collides
-        DamageController damagecontroller = collision.gameObject.GetComponent<DamageController>();
+        DamageController damageController = collision.gameObject.GetComponent<DamageController>();
+
+        // Added to prevent null reference in certain situations
+        if (!damageController)
+        {
+            return;
+        }
 
         //Manages the damage calculations
-        ManageDamage(damagecontroller);
+        ManageDamage(damageController);
     }
 
     private void ManageDamage(DamageController damagecontroller)
     {
         // Applies damage to the health of this object
         health -= damagecontroller.GetDamage();
+
+        //Destroys the laser on collision
+        damagecontroller.Hit();
 
         //Destroys the object when the health is <= 0
         if (health <= 0)

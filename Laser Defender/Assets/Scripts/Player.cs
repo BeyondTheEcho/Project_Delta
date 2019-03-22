@@ -6,8 +6,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     //Config
+    [Header("Player Variables")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float padding = 1f;
+    [SerializeField] float health = 1000f;
+
+    [Header("Player Weapons")]
     [SerializeField] GameObject laserPrefab;
     [SerializeField] float laserSpeed = 10f;
     [SerializeField] float firedelay = 1f;
@@ -84,5 +88,36 @@ public class Player : MonoBehaviour
         // Establishes the Y min and max values as they relate to the gamespace, relative to the Cameras boundaries
         yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + padding;
         yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - padding;
+    }
+
+    // Is triggered on collisions
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Assigns the damagecontroller var to the DamageController.cs attached to the object that collides
+        DamageController damageController = collision.gameObject.GetComponent<DamageController>();
+
+        // Added to prevent null reference in certain situations
+        if (!damageController)
+        {
+            return;
+        }
+
+        //Manages the damage calculations
+        ManageDamage(damageController);
+    }
+
+    private void ManageDamage(DamageController damagecontroller)
+    {
+        // Applies damage to the health of this object
+        health -= damagecontroller.GetDamage();
+
+        //Destroys the laser on collision
+        damagecontroller.Hit();
+
+        //Destroys the object when the health is <= 0
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
