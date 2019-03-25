@@ -6,12 +6,19 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     //Config
+    [Header("Enemy Config")]
     [SerializeField] float health = 100;
+
+    [Header("Laser Config")]
+    [SerializeField] GameObject enemyLaserPrefab;
     [SerializeField] float laserTimer;
     [SerializeField] float minTimeBetweenShots = 0.2f;
     [SerializeField] float maxTimeBetweenShots = 3f;
-    [SerializeField] GameObject enemyLaserPrefab;
     [SerializeField] float enemyLaserVelocity = 6f;
+
+    [Header("Explosion Config")]
+    [SerializeField] GameObject explosionPrefab;
+    [SerializeField] float explosionLifeTime = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -74,7 +81,18 @@ public class Enemy : MonoBehaviour
         //Destroys the object when the health is <= 0
         if (health <= 0)
         {
-            Destroy(gameObject);
+            //Triggers death function
+            TriggerDeath();
         }
+    }
+
+    private void TriggerDeath()
+    {
+        //Instatinates Explosion VFX
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation) as GameObject;
+        //Destroys explosion after a fixed time - Variable in config
+        Destroy(explosion, explosionLifeTime);
+        //Destroys this game object
+        Destroy(gameObject);
     }
 }

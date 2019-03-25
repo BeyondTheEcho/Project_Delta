@@ -12,12 +12,12 @@ public class Player : MonoBehaviour
     [SerializeField] float padding = 1f;
     [SerializeField] float health = 1000f;
     [SerializeField] float healthBarMax = 1000f;
-    [SerializeField] GameObject healthbar;
+    [SerializeField] GameObject healthBar;
 
     [Header("Player Weapons")]
     [SerializeField] GameObject laserPrefab;
     [SerializeField] float laserSpeed = 10f;
-    [SerializeField] float firedelay = 1f;
+    [SerializeField] float fireDelay = 0.2f;
 
     // In Script Config / Variables
     float xMin;
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
         {
             GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
             laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
-            yield return new WaitForSeconds(firedelay);
+            yield return new WaitForSeconds(fireDelay);
         }
 
     }
@@ -133,6 +133,6 @@ public class Player : MonoBehaviour
         // Creates a variable that stores the percentage of the health bar fill
         float healthBarFill = health / healthBarMax;
         //Sets the fill amount to the percentage of health / total health
-        healthbar.GetComponent<Image>().fillAmount = healthBarFill;
+        healthBar.GetComponent<Image>().fillAmount = healthBarFill;
     }
 }
