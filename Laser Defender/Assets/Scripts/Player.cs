@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float padding = 1f;
     [SerializeField] float health = 1000f;
+    [SerializeField] float healthBarMax = 1000f;
+    [SerializeField] GameObject healthbar;
 
     [Header("Player Weapons")]
     [SerializeField] GameObject laserPrefab;
@@ -111,7 +114,10 @@ public class Player : MonoBehaviour
         // Applies damage to the health of this object
         health -= damagecontroller.GetDamage();
 
-        //Destroys the laser on collision
+        // Updates the health bar
+        UpdateHealthBar();
+
+        // Destroys the laser on collision
         damagecontroller.Hit();
 
         //Destroys the object when the health is <= 0
@@ -119,5 +125,14 @@ public class Player : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    //Updates the health bar fill in the Canvas
+    private void UpdateHealthBar()
+    {
+        // Creates a variable that stores the percentage of the health bar fill
+        float healthBarFill = health / healthBarMax;
+        //Sets the fill amount to the percentage of health / total health
+        healthbar.GetComponent<Image>().fillAmount = healthBarFill;
     }
 }
