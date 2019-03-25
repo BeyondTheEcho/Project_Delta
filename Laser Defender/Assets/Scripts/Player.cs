@@ -13,11 +13,15 @@ public class Player : MonoBehaviour
     [SerializeField] float health = 1000f;
     [SerializeField] float healthBarMax = 1000f;
     [SerializeField] GameObject healthBar;
+    [SerializeField] AudioClip explosionClip;
+    [SerializeField][Range(0,1)] float explosionVol = 1f;
 
     [Header("Player Weapons")]
     [SerializeField] GameObject laserPrefab;
+    [SerializeField] AudioClip laserClip;
     [SerializeField] float laserSpeed = 10f;
     [SerializeField] float fireDelay = 0.2f;
+    [SerializeField][Range(0, 1)] float laserVol = 0.2f;
 
     // In Script Config / Variables
     float xMin;
@@ -43,23 +47,31 @@ public class Player : MonoBehaviour
 
     private void FireLaser()
     {
+        //When Space is first pressed and held, starts a coroutine
         if (Input.GetButtonDown("Fire1"))
         {
             laserCoroutine = StartCoroutine(FireLaserWhileHeld());         
         }
-
+        //When space is released this stops the coroutine
         if (Input.GetButtonUp("Fire1"))
         {
             StopCoroutine(laserCoroutine);
         }           
     }
 
+    //Coroutine that players while space is held
     IEnumerator FireLaserWhileHeld()
     {
+        // While (true) is always true and will run FOREVER
         while (true)
         {
+            //Instantiates a laser
             GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
+            //Imparts velocity to the new laser
             laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+            //Plays laser audio clip
+            AudioSource.PlayClipAtPoint(laserClip, transform.position, laserVol);
+            // Yields return for the fireDelay var
             yield return new WaitForSeconds(fireDelay);
         }
 
@@ -123,6 +135,9 @@ public class Player : MonoBehaviour
         //Destroys the object when the health is <= 0
         if (health <= 0)
         {
+            //Plays explosion audio
+            AudioSource.PlayClipAtPoint(explosionClip, transform.position, explosionVol);
+            //Destroys player
             Destroy(gameObject);
         }
     }

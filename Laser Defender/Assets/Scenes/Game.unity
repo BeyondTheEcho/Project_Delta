@@ -228,7 +228,7 @@ PrefabInstance:
     - target: {fileID: 8427795285194693355, guid: 20cd7a9b64c05ed49aa906e276f1a42b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8427795285194693355, guid: 20cd7a9b64c05ed49aa906e276f1a42b,
         type: 3}
@@ -316,7 +316,7 @@ PrefabInstance:
     - target: {fileID: 1600258458682276525, guid: d51ea2c5eb2e717428474a59207cdd00,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1600258458682276525, guid: d51ea2c5eb2e717428474a59207cdd00,
         type: 3}
@@ -353,6 +353,16 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1130358650}
+    - target: {fileID: 1600258458682276527, guid: d51ea2c5eb2e717428474a59207cdd00,
+        type: 3}
+      propertyPath: explosionClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4d45a895303036d479bd7dffee1c7b50, type: 3}
+    - target: {fileID: 1600258458682276527, guid: d51ea2c5eb2e717428474a59207cdd00,
+        type: 3}
+      propertyPath: laserClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4f252aa440a4ef7409ce330d3be4cd22, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d51ea2c5eb2e717428474a59207cdd00, type: 3}
 --- !u!1 &1130358650 stripped
@@ -480,7 +490,7 @@ PrefabInstance:
     - target: {fileID: 4219611801843276072, guid: 2a385920db6337f408bed912ebe2395f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4219611801843276072, guid: 2a385920db6337f408bed912ebe2395f,
         type: 3}
@@ -549,7 +559,7 @@ PrefabInstance:
     - target: {fileID: 1383290905312520336, guid: 0a062e0dbcacc7c408eceda7b97d662a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1383290905312520336, guid: 0a062e0dbcacc7c408eceda7b97d662a,
         type: 3}
@@ -951,7 +961,7 @@ PrefabInstance:
     - target: {fileID: 3132123321091548389, guid: 8dddee7cabb6aba469e4ee7448cdc727,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3132123321091548389, guid: 8dddee7cabb6aba469e4ee7448cdc727,
         type: 3}

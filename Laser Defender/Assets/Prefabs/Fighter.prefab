@@ -109,10 +109,12 @@ MonoBehaviour:
   health: 100
   enemyLaserPrefab: {fileID: 6980325470427309259, guid: e2658f81379b9ca4aa43e15a1decfaee,
     type: 3}
+  laserClip: {fileID: 8300000, guid: 576cf547f6817ad498d45b881a72fbfa, type: 3}
   laserTimer: 0
   minTimeBetweenShots: 0.2
   maxTimeBetweenShots: 3
   enemyLaserVelocity: 8
+  explosionClip: {fileID: 8300000, guid: ec339d42fba4b7346a35c7113b5c59a1, type: 3}
   explosionPrefab: {fileID: 1633190678027412218, guid: c99494cefdb0cd54689beffdc91f4a65,
     type: 3}
   explosionLifeTime: 1

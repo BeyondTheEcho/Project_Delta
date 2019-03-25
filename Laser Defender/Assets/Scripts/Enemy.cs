@@ -11,14 +11,18 @@ public class Enemy : MonoBehaviour
 
     [Header("Laser Config")]
     [SerializeField] GameObject enemyLaserPrefab;
+    [SerializeField] AudioClip laserClip;
     [SerializeField] float laserTimer;
     [SerializeField] float minTimeBetweenShots = 0.2f;
     [SerializeField] float maxTimeBetweenShots = 3f;
     [SerializeField] float enemyLaserVelocity = 6f;
+    [SerializeField][Range(0, 1)] float laserVol = 1f;
 
     [Header("Explosion Config")]
+    [SerializeField] AudioClip explosionClip;
     [SerializeField] GameObject explosionPrefab;
     [SerializeField] float explosionLifeTime = 1f;
+    [SerializeField][Range(0, 1)] float explosionVol = 0.3f;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +56,9 @@ public class Enemy : MonoBehaviour
         // Instantiates an enemy laser prefab
         GameObject laser = Instantiate(enemyLaserPrefab, transform.position, Quaternion.identity) as GameObject;
         laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -enemyLaserVelocity);
+
+        //Plays laser audio
+        AudioSource.PlayClipAtPoint(laserClip, transform.position, laserVol);
     }
 
     // Is triggered on collisions
@@ -92,6 +99,8 @@ public class Enemy : MonoBehaviour
         GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation) as GameObject;
         //Destroys explosion after a fixed time - Variable in config
         Destroy(explosion, explosionLifeTime);
+        //Plays explosion audio
+        AudioSource.PlayClipAtPoint(explosionClip, transform.position, explosionVol);
         //Destroys this game object
         Destroy(gameObject);
     }
