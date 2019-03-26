@@ -572,6 +572,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8724732018750217579}
+    - target: {fileID: 7194882594783905443, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7194882594783905443, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitButton
+      objectReference: {fileID: 0}
     - target: {fileID: 6994281071462715860, guid: 4ba9f374084fa8944a8e53e6826ffb60,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -593,6 +603,41 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8327952723272452332, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298012406563771195, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -235
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912717857326983980, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -174
+      objectReference: {fileID: 0}
+    - target: {fileID: 6554171234553358343, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -238
+      objectReference: {fileID: 0}
+    - target: {fileID: 2281092440617517542, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8724732018750217579}
+    - target: {fileID: 2281092440617517542, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 5580353023261169862, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5580353023261169862, guid: 4ba9f374084fa8944a8e53e6826ffb60,
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
