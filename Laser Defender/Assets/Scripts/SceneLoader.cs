@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    private void Awake()
+    {
+        //Set screen size for Standalone
+            Screen.SetResolution(750, 1200, false);
+            Screen.fullScreen = true;
+    }
+
     //Loads the next scene in the build index
     public void LoadNextScene()
     {
