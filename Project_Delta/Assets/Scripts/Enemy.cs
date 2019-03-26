@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     //Config
     [Header("Enemy Config")]
     [SerializeField] float health = 100;
+    [SerializeField] int scoreValue = 10;
 
     [Header("Laser Config")]
     [SerializeField] GameObject enemyLaserPrefab;
@@ -95,13 +96,28 @@ public class Enemy : MonoBehaviour
 
     private void TriggerDeath()
     {
+        //Triggers Death VFX/SFX
+        TriggerDeathEffects();
+        //Updates Score
+        IncreaseScore();
+        //Destroys this game object
+        Destroy(gameObject);
+    }
+
+    private void TriggerDeathEffects()
+    {
         //Instatinates Explosion VFX
         GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation) as GameObject;
         //Destroys explosion after a fixed time - Variable in config
         Destroy(explosion, explosionLifeTime);
         //Plays explosion audio
         AudioSource.PlayClipAtPoint(explosionClip, transform.position, explosionVol);
-        //Destroys this game object
-        Destroy(gameObject);
+    }
+
+    private void IncreaseScore()
+    {
+        //GameSession is a singleton and should always exist.
+        //Calls the UpdateScore Method and passes in the value of this enemy to be added to the score
+        FindObjectOfType<GameSession>().UpdateScore(scoreValue);
     }
 }

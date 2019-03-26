@@ -19,6 +19,13 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex + 1);
     }
 
+    //Loads Game - Use from Start OR Try Again
+    public void LoadGame()
+    {
+        FindObjectOfType<GameSession>().ResetGame();
+        SceneManager.LoadScene("Game");
+    }
+
     // Loads Scene Index zero
     public void BackToStart()
     {
