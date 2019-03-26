@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField] float padding = 1f;
     [SerializeField] float health = 1000f;
     [SerializeField] float healthBarMax = 1000f;
+    [SerializeField] int gameOverDelay = 3;
     [SerializeField] GameObject healthBar;
-    [SerializeField] AudioClip explosionClip;
     [SerializeField][Range(0,1)] float explosionVol = 1f;
 
     [Header("Player Weapons")]
@@ -22,6 +22,11 @@ public class Player : MonoBehaviour
     [SerializeField] float laserSpeed = 10f;
     [SerializeField] float fireDelay = 0.2f;
     [SerializeField][Range(0, 1)] float laserVol = 0.2f;
+
+    [Header("Player Explosion")]
+    [SerializeField] AudioClip explosionClip;
+    [SerializeField] GameObject explosionPrefab;
+    [SerializeField] float explosionLifeTime = 1;
 
     // In Script Config / Variables
     float xMin;
@@ -135,11 +140,34 @@ public class Player : MonoBehaviour
         //Destroys the object when the health is <= 0
         if (health <= 0)
         {
-            //Plays explosion audio
-            AudioSource.PlayClipAtPoint(explosionClip, transform.position, explosionVol);
-            //Destroys player
-            Destroy(gameObject);
+            PlayerDie();
         }
+    }
+
+    private void PlayerDie()
+    {
+        //Plays death VFX and SFX
+        DeathEffects();
+        // Waits for the gameOverDelay and then loads game over
+        LoadGameOver();
+        //Destroys player
+        Destroy(gameObject);
+    }
+
+    private void DeathEffects()
+    {
+        //Plays explosion audio
+        AudioSource.PlayClipAtPoint(explosionClip, transform.position, explosionVol);
+        //Instatinates Player Explosion VFX
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation) as GameObject;
+        //Destroys explosion after a fixed time - Variable in config
+        Destroy(explosion, explosionLifeTime);
+    }
+
+    private void LoadGameOver()
+    {
+        //Starts a coroutine in SceneLoader.cs that waits
+        FindObjectOfType<SceneLoader>().LoadGameOver(gameOverDelay);
     }
 
     //Updates the health bar fill in the Canvas
