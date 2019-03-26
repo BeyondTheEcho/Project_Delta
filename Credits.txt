@@ -1,0 +1,16 @@
+- Hero Immortal
+https://opengameart.org/content/hero-immortal
+Credit to: Trevor Lentz
+
+- Through Space
+https://opengameart.org/content/through-space
+Credit to: maxstack
+
+- Various Kenney Assets
+https://kenney.nl/assets
+Credit to: Kenney
+
+- GameDev.tv
+https://github.com/CompleteUnityDeveloper
+Guidance through community / Udemy C# Courses
+Credit to: Ben Tristem, Rick Davidson
