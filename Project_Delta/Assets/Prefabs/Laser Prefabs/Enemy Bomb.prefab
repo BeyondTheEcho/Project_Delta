@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4531203399309881936}
   - component: {fileID: 4236047742624276647}
   - component: {fileID: 1601814466927227325}
+  - component: {fileID: 6623414328669683306}
   - component: {fileID: 3047184230427949361}
   - component: {fileID: 5444899714207802318}
   m_Layer: 11
@@ -117,6 +118,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 300
+--- !u!114 &6623414328669683306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6980325470427309259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7822565c8715f04a9a3a816fb434cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinSpeed: 1000
 --- !u!58 &3047184230427949361
 CircleCollider2D:
   m_ObjectHideFlags: 0
