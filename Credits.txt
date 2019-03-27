@@ -1,16 +1,14 @@
-- Hero Immortal
-https://opengameart.org/content/hero-immortal
-Credit to: Trevor Lentz
-
-- Through Space
-https://opengameart.org/content/through-space
-Credit to: maxstack
-
-- Various Kenney Assets
-https://kenney.nl/assets
-Credit to: Kenney
-
-- GameDev.tv
+- Complete C# Unity Developer 2D: Learn To Code Making Games (Udemy Course by GameDev.tv)
 https://github.com/CompleteUnityDeveloper
-Guidance through community / Udemy C# Courses
-Credit to: Ben Tristem, Rick Davidson
+1) Guidance through community
+2) Udemy C# Course Material
+3) Various included assets
+Credit to: Ben Tristem, Rick Davidson, GameDev.tv
+
+"50 CC0 Sci-Fi SFX" by Rubberduck, licensed [CC0]: https://opengameart.org/content/50-cc0-sci-fi-sfx
+
+"Hero Immortal" by Trevor Lentz, licensed [CC-BY-SA 3.0]: https://opengameart.org/content/hero-immortal
+
+"Through Space" by Maxstack, licensed [CC-BY-SA 3.0]: https://opengameart.org/content/through-space
+
+Various Sprites by Kenney, licensed [CC0]:https://kenney.nl
