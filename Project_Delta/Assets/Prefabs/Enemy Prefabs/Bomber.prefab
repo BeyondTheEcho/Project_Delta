@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab9d666a3b45d547b6e6cb890172a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
+  health: 600
   scoreValue: 100
   enemyLaserPrefab: {fileID: 6980325470427309259, guid: dfbda0214cfe20549ae20d7382f9ddcc,
     type: 3}
@@ -116,7 +116,7 @@ MonoBehaviour:
   laserTimer: 0
   minTimeBetweenShots: 1.5
   maxTimeBetweenShots: 3
-  enemyLaserVelocity: 3
+  enemyLaserVelocity: 3.5
   laserVol: 0.3
   explosionClip: {fileID: 8300000, guid: ec339d42fba4b7346a35c7113b5c59a1, type: 3}
   explosionPrefab: {fileID: 1633190678027412218, guid: c99494cefdb0cd54689beffdc91f4a65,

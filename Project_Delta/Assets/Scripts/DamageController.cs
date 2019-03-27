@@ -14,6 +14,10 @@ public class DamageController : MonoBehaviour
 
     public void Hit()
     {
+        if (gameObject.GetComponent<Enemy>())
+        {
+            gameObject.GetComponent<Enemy>().TriggerDeath();
+        }
         Destroy(gameObject);
     }
 }

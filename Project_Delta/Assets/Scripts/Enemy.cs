@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void TriggerDeath()
+    public void TriggerDeath()
     {
         //Triggers Death VFX/SFX
         TriggerDeathEffects();
