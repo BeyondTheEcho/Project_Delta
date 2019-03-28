@@ -10,11 +10,7 @@ public class Player : MonoBehaviour
     [Header("Player Variables")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float padding = 1f;
-    [SerializeField] float health = 1000f;
-    [SerializeField] float healthBarMax = 1000f;
     [SerializeField] int gameOverDelay = 3;
-    [SerializeField] GameObject healthBar;
-    [SerializeField][Range(0,1)] float explosionVol = 1f;
 
     [Header("Player Weapons")]
     [SerializeField] GameObject laserPrefab;
@@ -27,6 +23,21 @@ public class Player : MonoBehaviour
     [SerializeField] AudioClip explosionClip;
     [SerializeField] GameObject explosionPrefab;
     [SerializeField] float explosionLifeTime = 1;
+    [SerializeField] [Range(0, 1)] float explosionVol = 1f;
+
+    [Header("Shield Variables")]
+    [SerializeField] GameObject shieldBar;
+    [SerializeField] float shield = 1000f;
+    [SerializeField] float shieldBarMax = 1000f;
+
+    [Header("Heat Variables")]
+    [SerializeField] GameObject heatBar;
+    [SerializeField] float currentHeat = 0.00f;
+    [SerializeField] float maxHeat = 1f;
+    [SerializeField] float heatIncriment = 0.01f;
+    [SerializeField] float heatCooldown = 0.05f;
+    [SerializeField] int cooldownPeriod = 1;
+    [SerializeField] bool cooldownActive = false;
 
     // In Script Config / Variables
     float xMin;
@@ -34,8 +45,9 @@ public class Player : MonoBehaviour
     float yMin;
     float yMax;
 
-    // Cached References
+    // Coroutine References
     Coroutine laserCoroutine;
+    Coroutine heatCool;
 
     // Start is called before the first frame update
     void Start()
@@ -55,12 +67,22 @@ public class Player : MonoBehaviour
         //When Space is first pressed and held, starts a coroutine
         if (Input.GetButtonDown("Fire1"))
         {
-            laserCoroutine = StartCoroutine(FireLaserWhileHeld());         
+            //If the Reduce Heat coroutine is active, end it
+            if (cooldownActive)
+            {
+                StopCoroutine(heatCool);
+            }
+
+            //Starts the FireLaserWhileHeld coroutine
+            laserCoroutine = StartCoroutine(FireLaserWhileHeld());
         }
-        //When space is released this stops the coroutine
+        //When space is released this stops the FireLaserWhileHeld coroutine
         if (Input.GetButtonUp("Fire1"))
         {
+            //Stops firing
             StopCoroutine(laserCoroutine);
+            //Begins cooling down heat when not firing
+            heatCool = StartCoroutine(ReduceHeat());
         }           
     }
 
@@ -70,17 +92,50 @@ public class Player : MonoBehaviour
         // While (true) is always true and will run FOREVER
         while (true)
         {
-            //Instantiates a laser
-            GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
-            //Imparts velocity to the new laser
-            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
-            //Plays laser audio clip
-            AudioSource.PlayClipAtPoint(laserClip, transform.position, laserVol);
+            if (currentHeat <= maxHeat)
+            {
+                //Instantiates a laser
+                GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
+                //Imparts velocity to the new laser
+                laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+                //Plays laser audio clip
+                AudioSource.PlayClipAtPoint(laserClip, transform.position, laserVol);
+                //Increases Heat With Every Shot
+                IncrimentHeat();
+            }
             // Yields return for the fireDelay var
             yield return new WaitForSeconds(fireDelay);
         }
-
     }
+
+    //Incriments Heat
+    private void IncrimentHeat()
+    {
+        if (currentHeat <= maxHeat)
+        {
+            currentHeat += heatIncriment;
+            heatBar.GetComponent<Image>().fillAmount = currentHeat;
+        }
+    }
+
+    //This coroutine reduces Heat
+    IEnumerator ReduceHeat()
+    {
+        //While True is ALWAYS true
+        while (true)
+        {
+            //Sets the cooldownActive bool to true
+            cooldownActive = true;
+            //Reduces current by the heatCooldown var
+            currentHeat -= heatCooldown;
+            //Applies the current heat to the Image fill amount
+            heatBar.GetComponent<Image>().fillAmount = currentHeat;
+            //Yields return for the cooldownPeriod in Seconds
+            yield return new WaitForSeconds(cooldownPeriod);
+        }
+    }
+
+
 
     private void PlayerMove()
     {
@@ -129,7 +184,7 @@ public class Player : MonoBehaviour
     private void ManageDamage(DamageController damagecontroller)
     {
         // Applies damage to the health of this object
-        health -= damagecontroller.GetDamage();
+        shield -= damagecontroller.GetDamage();
 
         // Updates the health bar
         UpdateHealthBar();
@@ -138,7 +193,7 @@ public class Player : MonoBehaviour
         damagecontroller.Hit();
 
         //Destroys the object when the health is <= 0
-        if (health <= 0)
+        if (shield <= 0)
         {
             PlayerDie();
         }
@@ -174,8 +229,8 @@ public class Player : MonoBehaviour
     private void UpdateHealthBar()
     {
         // Creates a variable that stores the percentage of the health bar fill
-        float healthBarFill = health / healthBarMax;
+        float healthBarFill = shield / shieldBarMax;
         //Sets the fill amount to the percentage of health / total health
-        healthBar.GetComponent<Image>().fillAmount = healthBarFill;
+        shieldBar.GetComponent<Image>().fillAmount = healthBarFill;
     }
 }
