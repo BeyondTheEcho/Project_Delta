@@ -74,8 +74,10 @@ public class Enemy : MonoBehaviour
             return;
         }
 
+        //Checks if the object that collided is a torpedo
         if (collision.tag == "Torpedo")
         {
+            //If so this triggers the splash damage and death effects of the torpedo
             collision.SendMessage("TriggerDeathEffects");
             collision.SendMessage("ExplosionDamage");
         }

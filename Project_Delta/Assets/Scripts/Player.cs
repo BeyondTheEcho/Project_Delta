@@ -14,8 +14,10 @@ public class Player : MonoBehaviour
 
     [Header("Player Weapons")]
     [SerializeField] GameObject laserPrefab;
+    [SerializeField] GameObject torpedoCount;
     [SerializeField] AudioClip laserClip;
     [SerializeField] float laserSpeed = 10f;
+    [SerializeField] int remainingTorpedoes = 3;
     [SerializeField] float fireDelay = 0.2f;
     [SerializeField][Range(0, 1)] float laserVol = 0.2f;
 
@@ -70,6 +72,7 @@ public class Player : MonoBehaviour
         FireLaser();
         OverHeat();
         LaunchTorpedo();
+        UpdateTorpedoCount();
     }
 
     private void CoolDown()
@@ -308,11 +311,22 @@ public class Player : MonoBehaviour
         //When Left Alt is first pressed 
         if (Input.GetButtonDown("Fire2"))
         {
-            //Instantiates a Torpedo
-            GameObject torpedo = Instantiate(torpedoPrefab, transform.position, Quaternion.identity) as GameObject;
-            //Imparts velocity to the new laser
-            torpedo.GetComponent<Rigidbody2D>().velocity = new Vector2(0, torpedoSpeed);
+            //Check to see if the player has torpedoes
+            if (remainingTorpedoes > 0)
+            {
+                //Instantiates a Torpedo
+                GameObject torpedo = Instantiate(torpedoPrefab, transform.position, Quaternion.identity) as GameObject;
+                //Imparts velocity to the new laser
+                torpedo.GetComponent<Rigidbody2D>().velocity = new Vector2(0, torpedoSpeed);
+                //Subtracts 1 torpedo
+                remainingTorpedoes -= 1;
+            }
         }
 
+    }
+
+    private void UpdateTorpedoCount()
+    {
+        torpedoCount.GetComponent<TMPro.TMP_Text>().text = remainingTorpedoes.ToString();
     }
 }
