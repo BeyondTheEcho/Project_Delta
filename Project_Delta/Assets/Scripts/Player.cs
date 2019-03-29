@@ -94,10 +94,8 @@ public class Player : MonoBehaviour
         {
             if (currentHeat <= maxHeat)
             {
-                //Instantiates a laser
-                GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
-                //Imparts velocity to the new laser
-                laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+                //Creates lasers and imparts velocity
+                InstantiateLasers();
                 //Plays laser audio clip
                 AudioSource.PlayClipAtPoint(laserClip, transform.position, laserVol);
                 //Increases Heat With Every Shot
@@ -105,6 +103,28 @@ public class Player : MonoBehaviour
             }
             // Yields return for the fireDelay var
             yield return new WaitForSeconds(fireDelay);
+        }
+    }
+
+    private void InstantiateLasers()
+    {
+        if (FindObjectOfType<UIManagement>().GetDoubleLasers() == false)
+        {
+            //Instantiates a laser
+            GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
+            //Imparts velocity to the new laser
+            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+        }
+        else if (FindObjectOfType<UIManagement>().GetDoubleLasers() == true)
+        {
+            //Instantiates a laser
+            GameObject laser1 = Instantiate(laserPrefab, new Vector2(transform.position.x + 0.5f, transform.position.y), Quaternion.identity) as GameObject;
+            //Imparts velocity to the new laser
+            laser1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+            //Instantiates a laser
+            GameObject laser2 = Instantiate(laserPrefab, new Vector2(transform.position.x - 0.5f, transform.position.y), Quaternion.identity) as GameObject;
+            //Imparts velocity to the new laser
+            laser2.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
         }
     }
 

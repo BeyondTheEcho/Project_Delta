@@ -68,4 +68,9 @@ public class UIManagement : MonoBehaviour
             }
         }
     }
+
+    public bool GetDoubleLasers()
+    {
+        return doubleLasers;
+    }
 }
