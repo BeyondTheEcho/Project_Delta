@@ -36,8 +36,11 @@ public class Player : MonoBehaviour
     [SerializeField] float maxHeat = 1f;
     [SerializeField] float heatIncriment = 0.01f;
     [SerializeField] float heatCooldown = 0.05f;
-    [SerializeField] int cooldownPeriod = 1;
+    [SerializeField] int cooldownInterval = 1;
+    [SerializeField] int cooldownPeriod = 5;
     [SerializeField] bool cooldownActive = false;
+    [SerializeField] bool isOverHeated = false;
+    [SerializeField] bool isFiring = false;
 
     // In Script Config / Variables
     float xMin;
@@ -47,7 +50,8 @@ public class Player : MonoBehaviour
 
     // Coroutine References
     Coroutine laserCoroutine;
-    Coroutine heatCool;
+    Coroutine overHeat;
+    Coroutine coolDown;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +64,49 @@ public class Player : MonoBehaviour
     {
         PlayerMove();
         FireLaser();
+        OverHeat();
+    }
+
+    private void CoolDown()
+    {
+        if(isFiring == false)
+        {
+            coolDown = StartCoroutine(ReduceHeat());
+        }
+    }
+
+    //This coroutine reduces Heat
+    IEnumerator ReduceHeat()
+    {
+        while (true)
+        {
+            //Sets the cooldownActive bool to true
+            cooldownActive = true;
+            //applies cool down
+            currentHeat -= heatCooldown;
+            //clamps currentHeat between 0 and 1
+            currentHeat = Mathf.Clamp(currentHeat, 0, 1);
+            //Applies the current heat to the Image fill amount
+            heatBar.GetComponent<Image>().fillAmount = currentHeat;
+            //Yields return for the cooldownPeriod in Seconds
+            yield return new WaitForSeconds(cooldownInterval);
+        }
+    }
+
+    private void OverHeat()
+    {
+        if(currentHeat >= maxHeat)
+        {
+            overHeat = StartCoroutine(OverHeatPeriod());
+        }
+    }
+
+    IEnumerator OverHeatPeriod()
+    {
+        isOverHeated = true;
+        yield return new WaitForSeconds(cooldownPeriod);
+        isOverHeated = false;
+        StopCoroutine(overHeat);
     }
 
     private void FireLaser()
@@ -67,12 +114,6 @@ public class Player : MonoBehaviour
         //When Space is first pressed and held, starts a coroutine
         if (Input.GetButtonDown("Fire1"))
         {
-            //If the Reduce Heat coroutine is active, end it
-            if (cooldownActive)
-            {
-                StopCoroutine(heatCool);
-            }
-
             //Starts the FireLaserWhileHeld coroutine
             laserCoroutine = StartCoroutine(FireLaserWhileHeld());
         }
@@ -81,8 +122,12 @@ public class Player : MonoBehaviour
         {
             //Stops firing
             StopCoroutine(laserCoroutine);
-            //Begins cooling down heat when not firing
-            heatCool = StartCoroutine(ReduceHeat());
+
+            if(isFiring == true)
+            {
+                isFiring = false;
+                CoolDown();
+            }
         }           
     }
 
@@ -92,12 +137,18 @@ public class Player : MonoBehaviour
         // While (true) is always true and will run FOREVER
         while (true)
         {
-            if (currentHeat <= maxHeat)
+            if (isOverHeated == false)
             {
+                //If the Reduce Heat coroutine is active, end it
+                if (cooldownActive == true)
+                {
+                    StopCoroutine(coolDown);
+                }
+
+                cooldownActive = false;
+                isFiring = true;
                 //Creates lasers and imparts velocity
                 InstantiateLasers();
-                //Plays laser audio clip
-                AudioSource.PlayClipAtPoint(laserClip, transform.position, laserVol);
                 //Increases Heat With Every Shot
                 IncrimentHeat();
             }
@@ -126,6 +177,9 @@ public class Player : MonoBehaviour
             //Imparts velocity to the new laser
             laser2.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
         }
+
+        //Plays laser audio clip
+        AudioSource.PlayClipAtPoint(laserClip, transform.position, laserVol);
     }
 
     //Incriments Heat
@@ -133,29 +187,14 @@ public class Player : MonoBehaviour
     {
         if (currentHeat <= maxHeat)
         {
+            //Increases currentHeat
             currentHeat += heatIncriment;
+            //Clamps currentHeat between 0 and 1
+            currentHeat = Mathf.Clamp(currentHeat, 0, 1);
+            //Applies the new heat
             heatBar.GetComponent<Image>().fillAmount = currentHeat;
         }
     }
-
-    //This coroutine reduces Heat
-    IEnumerator ReduceHeat()
-    {
-        //While True is ALWAYS true
-        while (true)
-        {
-            //Sets the cooldownActive bool to true
-            cooldownActive = true;
-            //Reduces current by the heatCooldown var
-            currentHeat -= heatCooldown;
-            //Applies the current heat to the Image fill amount
-            heatBar.GetComponent<Image>().fillAmount = currentHeat;
-            //Yields return for the cooldownPeriod in Seconds
-            yield return new WaitForSeconds(cooldownPeriod);
-        }
-    }
-
-
 
     private void PlayerMove()
     {
@@ -252,5 +291,10 @@ public class Player : MonoBehaviour
         float healthBarFill = shield / shieldBarMax;
         //Sets the fill amount to the percentage of health / total health
         shieldBar.GetComponent<Image>().fillAmount = healthBarFill;
+    }
+
+    public void SetHeatCooldown(float heatCool)
+    {
+        heatCooldown = heatCool;
     }
 }

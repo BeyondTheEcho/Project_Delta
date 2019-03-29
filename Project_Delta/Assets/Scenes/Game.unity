@@ -316,6 +316,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20cd7a9b64c05ed49aa906e276f1a42b, type: 3}
+--- !u!1 &753212975 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2454463795319246224, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+    type: 3}
+  m_PrefabInstance: {fileID: 537804246159494828}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &887294848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -403,6 +409,11 @@ PrefabInstance:
       propertyPath: shieldBar
       value: 
       objectReference: {fileID: 1130358650}
+    - target: {fileID: 1600258458682276527, guid: d51ea2c5eb2e717428474a59207cdd00,
+        type: 3}
+      propertyPath: cooldownPeriod
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d51ea2c5eb2e717428474a59207cdd00, type: 3}
 --- !u!1 &1130358650 stripped
@@ -634,45 +645,80 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3403980485851941359, guid: aa3891852535ee54e94bd7d8bbdebb9d,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3403980485851941359, guid: aa3891852535ee54e94bd7d8bbdebb9d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3403980485851941359, guid: aa3891852535ee54e94bd7d8bbdebb9d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3403980485851941359, guid: aa3891852535ee54e94bd7d8bbdebb9d,
-        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7838894370541369317}
-    - target: {fileID: 3403980485851941359, guid: aa3891852535ee54e94bd7d8bbdebb9d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DoubleLasers
-      objectReference: {fileID: 0}
-    - target: {fileID: 3403980485851941359, guid: aa3891852535ee54e94bd7d8bbdebb9d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 2454463795319246224, guid: aa3891852535ee54e94bd7d8bbdebb9d,
-        type: 3}
-      propertyPath: m_Name
-      value: Double Lasers Purchase Text
-      objectReference: {fileID: 0}
     - target: {fileID: 2700085083004127397, guid: aa3891852535ee54e94bd7d8bbdebb9d,
         type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2700085083004127397, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791744798232509832, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 196
+      objectReference: {fileID: 0}
+    - target: {fileID: 8473611209605784921, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8473611209605784921, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4678956827515364052, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4678956827515364052, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972119504578142443, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972119504578142443, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972119504578142443, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972119504578142443, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7838894370541369317}
+    - target: {fileID: 8972119504578142443, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HeatVenting
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972119504578142443, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558704078671061409, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558704078671061409, guid: aa3891852535ee54e94bd7d8bbdebb9d,
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
@@ -1108,7 +1154,7 @@ PrefabInstance:
         type: 3}
       propertyPath: doubleLasersText
       value: 
-      objectReference: {fileID: 8685368304574695581}
+      objectReference: {fileID: 753212975}
     - target: {fileID: 7838894370541369317, guid: ce5334747914de4499574b6b2e90b1c7,
         type: 3}
       propertyPath: upgradeCanvas
@@ -1437,12 +1483,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b0677047fba3404e8948f51aaf36eda, type: 3}
---- !u!1 &8685368304574695581 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2454463795319246224, guid: aa3891852535ee54e94bd7d8bbdebb9d,
-    type: 3}
-  m_PrefabInstance: {fileID: 537804246159494828}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9015816422540574516
 PrefabInstance:
   m_ObjectHideFlags: 0
