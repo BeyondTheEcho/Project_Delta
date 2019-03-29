@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6013611428288555259}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,8 +99,10 @@ MonoBehaviour:
   gameOverDelay: 1
   laserPrefab: {fileID: 5924173713034311208, guid: 5ca1feda67cc62c4396ec35bd9b94999,
     type: 3}
+  torpedoCount: {fileID: 0}
   laserClip: {fileID: 8300000, guid: 4f252aa440a4ef7409ce330d3be4cd22, type: 3}
   laserSpeed: 20
+  remainingTorpedoes: 3
   fireDelay: 0.15
   laserVol: 0.2
   explosionClip: {fileID: 8300000, guid: 4d45a895303036d479bd7dffee1c7b50, type: 3}
@@ -178,11 +180,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1600258458682276525}
     m_Modifications:
-    - target: {fileID: 222661661498418734, guid: 066db4b4d13528d478e1c06b19c11677,
-        type: 3}
-      propertyPath: m_Name
-      value: Thruster Particle System
-      objectReference: {fileID: 0}
     - target: {fileID: 222661661498418735, guid: 066db4b4d13528d478e1c06b19c11677,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -237,6 +234,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 222661661498418734, guid: 066db4b4d13528d478e1c06b19c11677,
+        type: 3}
+      propertyPath: m_Name
+      value: Thruster Particle System
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 066db4b4d13528d478e1c06b19c11677, type: 3}
