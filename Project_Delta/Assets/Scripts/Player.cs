@@ -42,6 +42,10 @@ public class Player : MonoBehaviour
     [SerializeField] bool isOverHeated = false;
     [SerializeField] bool isFiring = false;
 
+    [Header("Shield Variables")]
+    [SerializeField] GameObject torpedoPrefab;
+    [SerializeField] int torpedoSpeed = 5;
+
     // In Script Config / Variables
     float xMin;
     float xMax;
@@ -65,6 +69,7 @@ public class Player : MonoBehaviour
         PlayerMove();
         FireLaser();
         OverHeat();
+        LaunchTorpedo();
     }
 
     private void CoolDown()
@@ -296,5 +301,18 @@ public class Player : MonoBehaviour
     public void SetHeatCooldown(float heatCool)
     {
         heatCooldown = heatCool;
+    }
+
+    private void LaunchTorpedo()
+    {
+        //When Left Alt is first pressed 
+        if (Input.GetButtonDown("Fire2"))
+        {
+            //Instantiates a Torpedo
+            GameObject torpedo = Instantiate(torpedoPrefab, transform.position, Quaternion.identity) as GameObject;
+            //Imparts velocity to the new laser
+            torpedo.GetComponent<Rigidbody2D>().velocity = new Vector2(0, torpedoSpeed);
+        }
+
     }
 }

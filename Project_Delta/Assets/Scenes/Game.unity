@@ -176,7 +176,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &156212101
 PrefabInstance:
@@ -391,29 +391,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1600258458682276527, guid: d51ea2c5eb2e717428474a59207cdd00,
         type: 3}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 1130358650}
-    - target: {fileID: 1600258458682276527, guid: d51ea2c5eb2e717428474a59207cdd00,
-        type: 3}
-      propertyPath: fireDelay
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1600258458682276527, guid: d51ea2c5eb2e717428474a59207cdd00,
-        type: 3}
-      propertyPath: heatBar
-      value: 
-      objectReference: {fileID: 3171443458982575761}
-    - target: {fileID: 1600258458682276527, guid: d51ea2c5eb2e717428474a59207cdd00,
-        type: 3}
       propertyPath: shieldBar
       value: 
       objectReference: {fileID: 1130358650}
     - target: {fileID: 1600258458682276527, guid: d51ea2c5eb2e717428474a59207cdd00,
         type: 3}
-      propertyPath: cooldownPeriod
-      value: 5
-      objectReference: {fileID: 0}
+      propertyPath: heatBar
+      value: 
+      objectReference: {fileID: 3171443458982575761}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d51ea2c5eb2e717428474a59207cdd00, type: 3}
 --- !u!1 &1130358650 stripped
@@ -472,7 +457,7 @@ PrefabInstance:
     - target: {fileID: 1383290905312520336, guid: 0a062e0dbcacc7c408eceda7b97d662a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1383290905312520336, guid: 0a062e0dbcacc7c408eceda7b97d662a,
         type: 3}
@@ -1160,6 +1145,11 @@ PrefabInstance:
       propertyPath: upgradeCanvas
       value: 
       objectReference: {fileID: 5214818364077322728}
+    - target: {fileID: 7838894370541369317, guid: ce5334747914de4499574b6b2e90b1c7,
+        type: 3}
+      propertyPath: heatVentingText
+      value: 
+      objectReference: {fileID: 8685368304574695581}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce5334747914de4499574b6b2e90b1c7, type: 3}
 --- !u!1 &3171443458982575761 stripped
@@ -1483,6 +1473,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b0677047fba3404e8948f51aaf36eda, type: 3}
+--- !u!1 &8685368304574695581 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8191485605375730836, guid: aa3891852535ee54e94bd7d8bbdebb9d,
+    type: 3}
+  m_PrefabInstance: {fileID: 537804246159494828}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9015816422540574516
 PrefabInstance:
   m_ObjectHideFlags: 0

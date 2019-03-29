@@ -74,11 +74,17 @@ public class Enemy : MonoBehaviour
             return;
         }
 
+        if (collision.tag == "Torpedo")
+        {
+            collision.SendMessage("TriggerDeathEffects");
+            collision.SendMessage("ExplosionDamage");
+        }
+
         //Manages the damage calculations
         ManageDamage(damageController);
     }
 
-    private void ManageDamage(DamageController damagecontroller)
+    public void ManageDamage(DamageController damagecontroller)
     {
         // Applies damage to the health of this object
         health -= damagecontroller.GetDamage();
