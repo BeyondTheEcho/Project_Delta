@@ -96,21 +96,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   padding: 1
-  health: 1000
-  healthBarMax: 1000
   gameOverDelay: 1
-  healthBar: {fileID: 0}
-  explosionVol: 1
   laserPrefab: {fileID: 5924173713034311208, guid: 5ca1feda67cc62c4396ec35bd9b94999,
     type: 3}
   laserClip: {fileID: 8300000, guid: 4f252aa440a4ef7409ce330d3be4cd22, type: 3}
   laserSpeed: 20
-  fireDelay: 0.2
+  fireDelay: 0.15
   laserVol: 0.2
   explosionClip: {fileID: 8300000, guid: 4d45a895303036d479bd7dffee1c7b50, type: 3}
   explosionPrefab: {fileID: 1633190678027412218, guid: ad70a36a52d84594f9d59061544f0285,
     type: 3}
   explosionLifeTime: 1
+  explosionVol: 1
+  shieldBar: {fileID: 0}
+  shield: 1000
+  shieldBarMax: 1000
+  heatBar: {fileID: 0}
+  currentHeat: 0
+  maxHeat: 1
+  heatIncriment: 0.01
+  heatCooldown: 0.05
+  cooldownInterval: 1
+  cooldownPeriod: 5
+  cooldownActive: 0
+  isOverHeated: 0
+  isFiring: 0
+  torpedoPrefab: {fileID: 5924173713034311208, guid: b14cd00024ea80a439a55d08138f3c52,
+    type: 3}
+  torpedoSpeed: 5
 --- !u!60 &6013611428288555259
 PolygonCollider2D:
   m_ObjectHideFlags: 0

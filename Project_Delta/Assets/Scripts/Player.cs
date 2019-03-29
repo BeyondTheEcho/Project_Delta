@@ -10,16 +10,14 @@ public class Player : MonoBehaviour
     [Header("Player Variables")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float padding = 1f;
-    [SerializeField] float health = 1000f;
-    [SerializeField] float healthBarMax = 1000f;
     [SerializeField] int gameOverDelay = 3;
-    [SerializeField] GameObject healthBar;
-    [SerializeField][Range(0,1)] float explosionVol = 1f;
 
     [Header("Player Weapons")]
     [SerializeField] GameObject laserPrefab;
+    [SerializeField] GameObject torpedoCount;
     [SerializeField] AudioClip laserClip;
     [SerializeField] float laserSpeed = 10f;
+    [SerializeField] int remainingTorpedoes = 3;
     [SerializeField] float fireDelay = 0.2f;
     [SerializeField][Range(0, 1)] float laserVol = 0.2f;
 
@@ -27,6 +25,28 @@ public class Player : MonoBehaviour
     [SerializeField] AudioClip explosionClip;
     [SerializeField] GameObject explosionPrefab;
     [SerializeField] float explosionLifeTime = 1;
+    [SerializeField] [Range(0, 1)] float explosionVol = 1f;
+
+    [Header("Shield Variables")]
+    [SerializeField] GameObject shieldBar;
+    [SerializeField] float shield = 1000f;
+    [SerializeField] float shieldBarMax = 1000f;
+
+    [Header("Heat Variables")]
+    [SerializeField] GameObject heatBar;
+    [SerializeField] float currentHeat = 0.00f;
+    [SerializeField] float maxHeat = 1f;
+    [SerializeField] float heatIncriment = 0.01f;
+    [SerializeField] float heatCooldown = 0.05f;
+    [SerializeField] int cooldownInterval = 1;
+    [SerializeField] int cooldownPeriod = 5;
+    [SerializeField] bool cooldownActive = false;
+    [SerializeField] bool isOverHeated = false;
+    [SerializeField] bool isFiring = false;
+
+    [Header("Shield Variables")]
+    [SerializeField] GameObject torpedoPrefab;
+    [SerializeField] int torpedoSpeed = 5;
 
     // In Script Config / Variables
     float xMin;
@@ -34,8 +54,10 @@ public class Player : MonoBehaviour
     float yMin;
     float yMax;
 
-    // Cached References
+    // Coroutine References
     Coroutine laserCoroutine;
+    Coroutine overHeat;
+    Coroutine coolDown;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +70,51 @@ public class Player : MonoBehaviour
     {
         PlayerMove();
         FireLaser();
+        OverHeat();
+        LaunchTorpedo();
+        UpdateTorpedoCount();
+    }
+
+    private void CoolDown()
+    {
+        if(isFiring == false)
+        {
+            coolDown = StartCoroutine(ReduceHeat());
+        }
+    }
+
+    //This coroutine reduces Heat
+    IEnumerator ReduceHeat()
+    {
+        while (true)
+        {
+            //Sets the cooldownActive bool to true
+            cooldownActive = true;
+            //applies cool down
+            currentHeat -= heatCooldown;
+            //clamps currentHeat between 0 and 1
+            currentHeat = Mathf.Clamp(currentHeat, 0, 1);
+            //Applies the current heat to the Image fill amount
+            heatBar.GetComponent<Image>().fillAmount = currentHeat;
+            //Yields return for the cooldownPeriod in Seconds
+            yield return new WaitForSeconds(cooldownInterval);
+        }
+    }
+
+    private void OverHeat()
+    {
+        if(currentHeat >= maxHeat)
+        {
+            overHeat = StartCoroutine(OverHeatPeriod());
+        }
+    }
+
+    IEnumerator OverHeatPeriod()
+    {
+        isOverHeated = true;
+        yield return new WaitForSeconds(cooldownPeriod);
+        isOverHeated = false;
+        StopCoroutine(overHeat);
     }
 
     private void FireLaser()
@@ -55,12 +122,20 @@ public class Player : MonoBehaviour
         //When Space is first pressed and held, starts a coroutine
         if (Input.GetButtonDown("Fire1"))
         {
-            laserCoroutine = StartCoroutine(FireLaserWhileHeld());         
+            //Starts the FireLaserWhileHeld coroutine
+            laserCoroutine = StartCoroutine(FireLaserWhileHeld());
         }
-        //When space is released this stops the coroutine
+        //When space is released this stops the FireLaserWhileHeld coroutine
         if (Input.GetButtonUp("Fire1"))
         {
+            //Stops firing
             StopCoroutine(laserCoroutine);
+
+            if(isFiring == true)
+            {
+                isFiring = false;
+                CoolDown();
+            }
         }           
     }
 
@@ -70,16 +145,63 @@ public class Player : MonoBehaviour
         // While (true) is always true and will run FOREVER
         while (true)
         {
+            if (isOverHeated == false)
+            {
+                //If the Reduce Heat coroutine is active, end it
+                if (cooldownActive == true)
+                {
+                    StopCoroutine(coolDown);
+                }
+
+                cooldownActive = false;
+                isFiring = true;
+                //Creates lasers and imparts velocity
+                InstantiateLasers();
+                //Increases Heat With Every Shot
+                IncrimentHeat();
+            }
+            // Yields return for the fireDelay var
+            yield return new WaitForSeconds(fireDelay);
+        }
+    }
+
+    private void InstantiateLasers()
+    {
+        if (FindObjectOfType<UIManagement>().GetDoubleLasers() == false)
+        {
             //Instantiates a laser
             GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
             //Imparts velocity to the new laser
             laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
-            //Plays laser audio clip
-            AudioSource.PlayClipAtPoint(laserClip, transform.position, laserVol);
-            // Yields return for the fireDelay var
-            yield return new WaitForSeconds(fireDelay);
+        }
+        else if (FindObjectOfType<UIManagement>().GetDoubleLasers() == true)
+        {
+            //Instantiates a laser
+            GameObject laser1 = Instantiate(laserPrefab, new Vector2(transform.position.x + 0.5f, transform.position.y), Quaternion.identity) as GameObject;
+            //Imparts velocity to the new laser
+            laser1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+            //Instantiates a laser
+            GameObject laser2 = Instantiate(laserPrefab, new Vector2(transform.position.x - 0.5f, transform.position.y), Quaternion.identity) as GameObject;
+            //Imparts velocity to the new laser
+            laser2.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
         }
 
+        //Plays laser audio clip
+        AudioSource.PlayClipAtPoint(laserClip, transform.position, laserVol);
+    }
+
+    //Incriments Heat
+    private void IncrimentHeat()
+    {
+        if (currentHeat <= maxHeat)
+        {
+            //Increases currentHeat
+            currentHeat += heatIncriment;
+            //Clamps currentHeat between 0 and 1
+            currentHeat = Mathf.Clamp(currentHeat, 0, 1);
+            //Applies the new heat
+            heatBar.GetComponent<Image>().fillAmount = currentHeat;
+        }
     }
 
     private void PlayerMove()
@@ -129,7 +251,7 @@ public class Player : MonoBehaviour
     private void ManageDamage(DamageController damagecontroller)
     {
         // Applies damage to the health of this object
-        health -= damagecontroller.GetDamage();
+        shield -= damagecontroller.GetDamage();
 
         // Updates the health bar
         UpdateHealthBar();
@@ -138,7 +260,7 @@ public class Player : MonoBehaviour
         damagecontroller.Hit();
 
         //Destroys the object when the health is <= 0
-        if (health <= 0)
+        if (shield <= 0)
         {
             PlayerDie();
         }
@@ -174,8 +296,37 @@ public class Player : MonoBehaviour
     private void UpdateHealthBar()
     {
         // Creates a variable that stores the percentage of the health bar fill
-        float healthBarFill = health / healthBarMax;
+        float healthBarFill = shield / shieldBarMax;
         //Sets the fill amount to the percentage of health / total health
-        healthBar.GetComponent<Image>().fillAmount = healthBarFill;
+        shieldBar.GetComponent<Image>().fillAmount = healthBarFill;
+    }
+
+    public void SetHeatCooldown(float heatCool)
+    {
+        heatCooldown = heatCool;
+    }
+
+    private void LaunchTorpedo()
+    {
+        //When Left Alt is first pressed 
+        if (Input.GetButtonDown("Fire2"))
+        {
+            //Check to see if the player has torpedoes
+            if (remainingTorpedoes > 0)
+            {
+                //Instantiates a Torpedo
+                GameObject torpedo = Instantiate(torpedoPrefab, transform.position, Quaternion.identity) as GameObject;
+                //Imparts velocity to the new laser
+                torpedo.GetComponent<Rigidbody2D>().velocity = new Vector2(0, torpedoSpeed);
+                //Subtracts 1 torpedo
+                remainingTorpedoes -= 1;
+            }
+        }
+
+    }
+
+    private void UpdateTorpedoCount()
+    {
+        torpedoCount.GetComponent<TMPro.TMP_Text>().text = remainingTorpedoes.ToString();
     }
 }
