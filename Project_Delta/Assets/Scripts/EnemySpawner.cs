@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
 {
     //Config
     [SerializeField] List<WaveConfig> waveConfigs;
-    [SerializeField] int startingWave = 0;
+    [SerializeField] int startingWave;
     [SerializeField] bool looping = false;
 
     // Start has been turned into a Coroutine that loops endlessly. This allows the same series of waves to continue to spawn forever.
@@ -19,12 +19,6 @@ public class EnemySpawner : MonoBehaviour
             yield return StartCoroutine(SpawnAllWaves());
         }
         while (looping);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     //This Coroutine spawns all of the enemies in the wave that it is passed

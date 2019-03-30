@@ -40,12 +40,6 @@ public class UIManagement : MonoBehaviour
         player = FindObjectOfType<Player>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Pause()
     {
         isPaused = !isPaused;

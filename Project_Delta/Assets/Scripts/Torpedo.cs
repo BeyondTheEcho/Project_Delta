@@ -17,13 +17,6 @@ public class Torpedo : MonoBehaviour
         //Starts the delay (fuse) when instantiated
         StartCoroutine(Detonate());
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     
     IEnumerator Detonate()
     {
@@ -60,6 +53,7 @@ public class Torpedo : MonoBehaviour
                 //Triggers ManageDamage() in Enemy.cs and passes in the required DamageController.cs connected to this object
                 hitColliders[i].SendMessage("ManageDamage", gameObject.GetComponent<DamageController>());            
             }
+
             i++;
         }
     }
