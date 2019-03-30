@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     //Config
     [SerializeField] List<WaveConfig> waveConfigs;
     [SerializeField] int startingWave;
-    [SerializeField] bool looping = false;
+    [SerializeField] bool looping;
 
     // Start has been turned into a Coroutine that loops endlessly. This allows the same series of waves to continue to spawn forever.
     IEnumerator Start()

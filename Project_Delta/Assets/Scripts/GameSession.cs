@@ -7,7 +7,7 @@ using System;
 public class GameSession : MonoBehaviour
 {
     [Header("GameSession Config")]
-    [SerializeField] int currentScore = 0;
+    [SerializeField] int currentScore;
 
 
     //Awake is called before ANYTHING else.

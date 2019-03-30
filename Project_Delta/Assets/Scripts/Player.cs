@@ -34,15 +34,15 @@ public class Player : MonoBehaviour
 
     [Header("Heat Variables")]
     [SerializeField] GameObject heatBar;
-    [SerializeField] float currentHeat = 0.00f;
+    [SerializeField] float currentHeat;
     [SerializeField] float maxHeat = 1f;
     [SerializeField] float heatIncriment = 0.01f;
     [SerializeField] float heatCooldown = 0.05f;
     [SerializeField] int cooldownInterval = 1;
     [SerializeField] int cooldownPeriod = 5;
-    [SerializeField] bool cooldownActive = false;
-    [SerializeField] bool isOverHeated = false;
-    [SerializeField] bool isFiring = false;
+    [SerializeField] bool cooldownActive;
+    [SerializeField] bool isOverHeated;
+    [SerializeField] bool isFiring;
 
     [Header("Shield Variables")]
     [SerializeField] GameObject torpedoPrefab;

@@ -7,20 +7,20 @@ using TMPro;
 public class UIManagement : MonoBehaviour
 {
     [Header("Game Status")]
-    [SerializeField] bool isPaused = false;
+    [SerializeField] bool isPaused;
     [SerializeField] GameObject upgradeCanvas;
     [SerializeField] string purchasedText = "Purchased";
 
     [Header("Double Lasers")]
     [SerializeField] GameObject doubleLasersText;
-    [SerializeField] bool doubleLasers = false;
+    [SerializeField] bool doubleLasers;
     [SerializeField] int doubleLasersCost = 1;
 
     [Header("Heat Venting")]
     [SerializeField] GameObject heatVentingText;
     [SerializeField] int heatVentingCost = 1;
     [SerializeField] int heatVentingIncriment = 1;
-    [SerializeField] int currentVentingTier = 0;
+    [SerializeField] int currentVentingTier;
     [SerializeField] float heatVentingRate = 0.05f;
     [SerializeField] float heatVentingRateIncriment = 0.05f;
 
@@ -121,7 +121,8 @@ public class UIManagement : MonoBehaviour
 
     private void UpgradeHeatVenting()
     {
-        player.SetHeatCooldown(heatVentingRate += heatVentingRateIncriment);
+        heatVentingRate += heatVentingRateIncriment;
+        player.SetHeatCooldown(heatVentingRate);
         heatVentingCost += heatVentingIncriment;
         currentVentingTier++;
         gameSession.UpdateScore(-heatVentingCost);
