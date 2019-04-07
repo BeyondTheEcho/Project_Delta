@@ -9,6 +9,10 @@ public class GameSession : MonoBehaviour
     [Header("GameSession Config")]
     [SerializeField] int currentScore;
 
+    [Header("Stored Upgrade Variables")]
+    [SerializeField] public bool doubleLasers;
+    [SerializeField] public int currentVentingTier;
+
 
     //Awake is called before ANYTHING else.
     void Awake()
@@ -46,5 +50,21 @@ public class GameSession : MonoBehaviour
     public void ResetGame()
     {
         Destroy(gameObject);
+    }
+
+    // Is called in Warp() of WarpManager
+    public void SaveUpgrades()
+    {
+        UIManagement upgrades = FindObjectOfType<UIManagement>();
+        doubleLasers = upgrades.doubleLasers;
+        currentVentingTier = upgrades.currentVentingTier;
+    }
+
+    // Is called in Start of UIManagement
+    public void LoadUpgrades()
+    {
+        UIManagement upgrades = FindObjectOfType<UIManagement>();
+        upgrades.doubleLasers = doubleLasers;
+        upgrades.currentVentingTier = currentVentingTier;
     }
 }

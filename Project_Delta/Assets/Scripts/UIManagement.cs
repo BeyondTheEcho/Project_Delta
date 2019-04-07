@@ -13,14 +13,14 @@ public class UIManagement : MonoBehaviour
 
     [Header("Double Lasers")]
     [SerializeField] GameObject doubleLasersText;
-    [SerializeField] bool doubleLasers;
+    [SerializeField] public bool doubleLasers;
     [SerializeField] int doubleLasersCost = 1;
 
     [Header("Heat Venting")]
     [SerializeField] GameObject heatVentingText;
     [SerializeField] int heatVentingCost = 1;
     [SerializeField] int heatVentingIncriment = 1;
-    [SerializeField] int currentVentingTier;
+    [SerializeField] public int currentVentingTier;
     [SerializeField] float heatVentingRate = 0.05f;
     [SerializeField] float heatVentingRateIncriment = 0.05f;
 
@@ -32,6 +32,23 @@ public class UIManagement : MonoBehaviour
     void Start()
     {
         FindObjectReferences();
+        LoadExistingUpgrades();
+    }
+
+    private void LoadExistingUpgrades()
+    {
+        gameSession.LoadUpgrades();
+
+        if (doubleLasers == true)
+        {
+            UpdatedPurchaseText(doubleLasersText);
+        }
+
+        if (currentVentingTier == 3)
+        {
+            UpdatedPurchaseText(heatVentingText);
+        }
+
     }
 
     private void FindObjectReferences()

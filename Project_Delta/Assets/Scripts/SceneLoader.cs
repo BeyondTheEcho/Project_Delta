@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-
     //Coroutines
     Coroutine loadDelay;
 
@@ -23,7 +22,12 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex + 1);
     }
 
-    //Loads Game - Use from Start OR Try Again
+    public void LoadPassedScene(string level)
+    {
+        SceneManager.LoadScene(level);
+    }
+
+    //Loads Game
     public void LoadGame()
     {
         FindObjectOfType<GameSession>().ResetGame();
