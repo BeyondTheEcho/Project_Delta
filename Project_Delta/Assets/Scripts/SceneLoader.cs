@@ -31,7 +31,7 @@ public class SceneLoader : MonoBehaviour
     public void LoadGame()
     {
         FindObjectOfType<GameSession>().ResetGame();
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Level 1");
     }
 
     // Loads Scene Index zero
