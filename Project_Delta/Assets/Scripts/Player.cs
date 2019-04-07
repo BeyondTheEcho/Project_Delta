@@ -34,15 +34,15 @@ public class Player : MonoBehaviour
 
     [Header("Heat Variables")]
     [SerializeField] GameObject heatBar;
-    [SerializeField] float currentHeat = 0.00f;
+    [SerializeField] GameObject heatText;
+    [SerializeField] float currentHeat;
     [SerializeField] float maxHeat = 1f;
     [SerializeField] float heatIncriment = 0.01f;
     [SerializeField] float heatCooldown = 0.05f;
     [SerializeField] int cooldownInterval = 1;
     [SerializeField] int cooldownPeriod = 5;
-    [SerializeField] bool cooldownActive = false;
-    [SerializeField] bool isOverHeated = false;
-    [SerializeField] bool isFiring = false;
+    [SerializeField] bool cooldownActive;
+    [SerializeField] bool isOverHeated;
 
     [Header("Shield Variables")]
     [SerializeField] GameObject torpedoPrefab;
@@ -75,14 +75,6 @@ public class Player : MonoBehaviour
         UpdateTorpedoCount();
     }
 
-    private void CoolDown()
-    {
-        if(isFiring == false)
-        {
-            coolDown = StartCoroutine(ReduceHeat());
-        }
-    }
-
     //This coroutine reduces Heat
     IEnumerator ReduceHeat()
     {
@@ -90,14 +82,16 @@ public class Player : MonoBehaviour
         {
             //Sets the cooldownActive bool to true
             cooldownActive = true;
+            //Yields return for the cooldownPeriod in Seconds
+            yield return new WaitForSeconds(cooldownInterval);
             //applies cool down
             currentHeat -= heatCooldown;
             //clamps currentHeat between 0 and 1
             currentHeat = Mathf.Clamp(currentHeat, 0, 1);
             //Applies the current heat to the Image fill amount
             heatBar.GetComponent<Image>().fillAmount = currentHeat;
-            //Yields return for the cooldownPeriod in Seconds
-            yield return new WaitForSeconds(cooldownInterval);
+            //Sets the cooldownActive bool to false
+            cooldownActive = false;
         }
     }
 
@@ -112,8 +106,10 @@ public class Player : MonoBehaviour
     IEnumerator OverHeatPeriod()
     {
         isOverHeated = true;
+        heatText.SetActive(true);
         yield return new WaitForSeconds(cooldownPeriod);
         isOverHeated = false;
+        heatText.SetActive(false);
         StopCoroutine(overHeat);
     }
 
@@ -124,18 +120,16 @@ public class Player : MonoBehaviour
         {
             //Starts the FireLaserWhileHeld coroutine
             laserCoroutine = StartCoroutine(FireLaserWhileHeld());
+            // Stops the cooldown if it is active
+            if(cooldownActive == true) StopCoroutine(coolDown);
         }
         //When space is released this stops the FireLaserWhileHeld coroutine
         if (Input.GetButtonUp("Fire1"))
         {
             //Stops firing
             StopCoroutine(laserCoroutine);
-
-            if(isFiring == true)
-            {
-                isFiring = false;
-                CoolDown();
-            }
+            // Starts the cooldown cycle
+            coolDown = StartCoroutine(ReduceHeat());
         }           
     }
 
@@ -146,15 +140,7 @@ public class Player : MonoBehaviour
         while (true)
         {
             if (isOverHeated == false)
-            {
-                //If the Reduce Heat coroutine is active, end it
-                if (cooldownActive == true)
-                {
-                    StopCoroutine(coolDown);
-                }
-
-                cooldownActive = false;
-                isFiring = true;
+            {          
                 //Creates lasers and imparts velocity
                 InstantiateLasers();
                 //Increases Heat With Every Shot

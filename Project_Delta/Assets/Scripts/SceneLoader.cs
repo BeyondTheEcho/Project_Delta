@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    //Coroutines
+    Coroutine loadDelay;
+
     private void Awake()
     {
         //Set screen size for Standalone
@@ -19,11 +22,16 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex + 1);
     }
 
-    //Loads Game - Use from Start OR Try Again
+    public void LoadPassedScene(string level)
+    {
+        SceneManager.LoadScene(level);
+    }
+
+    //Loads Game
     public void LoadGame()
     {
         FindObjectOfType<GameSession>().ResetGame();
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Level 1");
     }
 
     // Loads Scene Index zero
@@ -42,7 +50,7 @@ public class SceneLoader : MonoBehaviour
     public void LoadGameOver(int delay)
     {
         //Passes the delay into the Coroutine and starts it
-        StartCoroutine(LoadAfterDelay(delay));
+        loadDelay = StartCoroutine(LoadAfterDelay(delay));
     }
 
     //Coroutine that is passed a delay when called
@@ -53,6 +61,6 @@ public class SceneLoader : MonoBehaviour
         //Loads the Game Over scene
         SceneManager.LoadScene("Game Over");
         //Kills the coroutine
-        StopCoroutine(LoadAfterDelay(delay));
+        StopCoroutine(loadDelay);
     }
 }

@@ -8,7 +8,7 @@ public class EnemyPathing : MonoBehaviour
     //Config
     WaveConfig waveConfig;
     List<Transform> waypoints;
-    int waypointIndex = 0;
+    int waypointIndex;
 
 
     // Start is called before the first frame update
