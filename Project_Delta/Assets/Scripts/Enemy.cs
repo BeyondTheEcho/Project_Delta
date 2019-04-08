@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -108,6 +108,10 @@ public class Enemy : MonoBehaviour
         TriggerDeathEffects();
         //Updates Score
         IncreaseScore();
+        //Calculate DropLoot actions
+        //DropLoot(); //TODO: TESTING COMMENT IN LATER
+        // ***************************************************************************
+        //Destroy game object last in all cases.  Perform all actions above this line.
         //Destroys this game object
         Destroy(gameObject);
     }
@@ -127,5 +131,13 @@ public class Enemy : MonoBehaviour
         //GameSession is a singleton and should always exist.
         //Calls the UpdateScore Method and passes in the value of this enemy to be added to the score
         FindObjectOfType<GameSession>().UpdateScore(scoreValue);
+    }
+
+        private void DropLoot()
+    {
+        //TODO: Loot Stuff here
+        //TODO: Calculate Loot Chance % based on salvaging upgrade (to be implimented later, set at 100% normal rate for now)
+        //TODO: Calculate Loot rarity range based on enemy killed
+        //TODO: Drop loot if rolled
     }
 }
