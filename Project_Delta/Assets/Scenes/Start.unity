@@ -690,6 +690,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8724732018750217579}
+    - target: {fileID: 8535559032912585664, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadCredits
+      objectReference: {fileID: 0}
     - target: {fileID: 2386190722850685407, guid: 4ba9f374084fa8944a8e53e6826ffb60,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -720,6 +725,36 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8327952723272452332, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_text
+      value: Credits
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327952723272452332, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327952723272452332, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327952723272452332, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327952723272452332, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327952723272452332, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5580353023261169862, guid: 4ba9f374084fa8944a8e53e6826ffb60,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -729,6 +764,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209814633617523354, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_Name
+      value: Credits Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 3441992198413991715, guid: 4ba9f374084fa8944a8e53e6826ffb60,
+        type: 3}
+      propertyPath: m_Name
+      value: Credits Text
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ba9f374084fa8944a8e53e6826ffb60, type: 3}

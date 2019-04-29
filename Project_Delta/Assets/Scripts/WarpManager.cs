@@ -8,7 +8,6 @@ public class WarpManager : MonoBehaviour
 {
     [Header("Warp Variables")]
     [SerializeField] float currentWarpCharge = 0;
-    [SerializeField] float maxWarpCharge = 300;
     [SerializeField] float warpFill = 0f;
 
     //Coroutines
@@ -31,11 +30,18 @@ public class WarpManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1);
+
+            //Adds 1 to the current charge per cycle
             currentWarpCharge++;
-            warpFill = currentWarpCharge / maxWarpCharge;
+
+            //The warpTimer variable is serialized on the player and is measured in seconds
+            warpFill = currentWarpCharge / FindObjectOfType<Player>().warpTimer;
+
+            //Clamps fill between the min and max 
             Mathf.Clamp(warpFill, 0, 1);
             gameObject.GetComponent<Image>().fillAmount = warpFill;
 
+            //Kills coroutine and warps when the bar is filled
             if (warpFill == 1.0f)
             {
                 StopCoroutine(warpTimer);

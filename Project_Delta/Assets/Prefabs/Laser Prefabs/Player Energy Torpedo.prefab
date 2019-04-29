@@ -163,5 +163,5 @@ MonoBehaviour:
   detonationRadius: 3
   explosionPrefab: {fileID: 5789150917722901887, guid: cdca4dfe2522a254d9ea21791e4cefdb,
     type: 3}
-  explosionClip: {fileID: 8300000, guid: fc2a2eca50dba3a47abce4764bfdf47a, type: 3}
+  explosionClip: {fileID: 8300000, guid: abdf214473c63ca49aeaed86df995051, type: 3}
   explosionVol: 1

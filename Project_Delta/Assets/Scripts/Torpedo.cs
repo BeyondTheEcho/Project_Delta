@@ -37,7 +37,7 @@ public class Torpedo : MonoBehaviour
         //Destroys explosion after a fixed time - Variable in config
         Destroy(explosion, 1);
         //Plays explosion audio
-        AudioSource.PlayClipAtPoint(explosionClip, transform.position, explosionVol);
+        AudioSource.PlayClipAtPoint(explosionClip, Camera.main.transform.position, explosionVol);
     }
 
     private void ExplosionDamage()

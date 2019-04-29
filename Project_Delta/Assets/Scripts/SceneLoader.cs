@@ -34,6 +34,12 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("Level 1");
     }
 
+    //Loads Credits
+    public void LoadCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
     // Loads Scene Index zero
     public void BackToStart()
     {

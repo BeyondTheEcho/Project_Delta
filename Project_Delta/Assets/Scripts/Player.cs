@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float padding = 1f;
     [SerializeField] int gameOverDelay = 3;
+    [SerializeField] public float warpTimer = 60f;
 
     [Header("Player Weapons")]
     [SerializeField] GameObject laserPrefab;
@@ -44,7 +45,7 @@ public class Player : MonoBehaviour
     [SerializeField] bool cooldownActive;
     [SerializeField] bool isOverHeated;
 
-    [Header("Shield Variables")]
+    [Header("Torpedo Variables")]
     [SerializeField] GameObject torpedoPrefab;
     [SerializeField] int torpedoSpeed = 5;
 
